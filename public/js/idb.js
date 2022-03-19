@@ -22,15 +22,15 @@ request.onsuccess = function(event) {
 function saveRecord(record) {
 
     const transaction = db.transaction(['new_transaction'], 'readwrite');
-    const transactionObjectStore = transaction.objectStore('new_transaction');
+    const budgetObjectStore = transaction.objectStore('new_transaction');
   
-    transactionObjectStore.add(record);
+    budgetObjectStore.add(record);
   }
 
   function uploadTransaction() {
       const transaction = db.transaction(['new_transaction'], 'readwrite');
 
-      const transactionObjectStore = transaction.objectStore('new_transaction');
+      const budgetObjectStore = transaction.objectStore('new_transaction');
 
       const getAll = transactionObjectStore.getAll();
 
@@ -51,8 +51,10 @@ function saveRecord(record) {
                   }
 
                   const transaction = db.transaction(['new_transaction'], 'readwrite');
-                  const transactionObjectStore = transaction.objectStore('new_transaction');
-                  transactionObjectStore.clear();
+                  const budgetObjectStore = transaction.objectStore('new_transaction');
+                  budgetObjectStore.clear();
+
+                  alert('All saved transactions have been submitted.');
               })
               .catch(err => {
                   console.log(err);
@@ -60,6 +62,4 @@ function saveRecord(record) {
           }
       };
   }
-
   window.addEventListener('online', uploadTransaction);
-
